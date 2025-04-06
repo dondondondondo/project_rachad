@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.LocationF"
+        tools:targetApi="31">
+        <activity
+            android:name=".activities.FavorisActivity"
+            android:banner="@drawable/app_icon_your_company"
+            android:exported="false"
+            android:icon="@drawable/app_icon_your_company"
+            android:label="@string/title_activity_favoris"
+            android:logo="@drawable/app_icon_your_company"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.LocationF">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.DetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PlaybackActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BrowseErrorActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FavorisActivity"
+            android:exported="false"
+            android:label="@string/title_activity_favoris"
+            android:theme="@style/Theme.LocationF" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SendDemandeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SendDemandActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.ClientOffersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AddOffreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DemandeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.OffreActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Offres"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Authentification"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>
