@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search"
+        android:title="Recherche"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="androidx.appcompat.widget.SearchView" />
+
+    <item
         android:id="@+id/action_profile"
         android:title="Profile"
 
@@ -13,4 +20,6 @@
         android:title="Favoris"
         android:icon="@drawable/ic_favorite_filled"
         app:showAsAction="ifRoom"/>
+
+
 </menu>

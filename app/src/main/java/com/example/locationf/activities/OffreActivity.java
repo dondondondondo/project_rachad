@@ -140,20 +140,54 @@ public class OffreActivity extends AppCompatActivity {
     }
 
     private void filterOffres(String searchText) {
-        // Implement your Firestore search/filter logic here
-        Query query = db.collection("users").document(userEmail).collection("offres")
-                .orderBy("titre")
-                .startAt(searchText)
-                .endAt(searchText + "\uf8ff");
+        if (searchText == null || searchText.trim().isEmpty()) {
+            // If search text is empty, load all offers
+            loadOffres();
+            return;
+        }
 
-        query.get().addOnSuccessListener(queryDocumentSnapshots -> {
-            // Update your RecyclerView with filtered results
+        // Convert search text to lowercase for case-insensitive comparison
+        String searchLower = searchText.toLowerCase().trim();
+
+        // We need to query the collection and filter in the app code
+        // since Firestore doesn't support OR conditions across multiple fields directly
+        offresRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
             List<Offre> filteredList = new ArrayList<>();
+
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 Offre offre = document.toObject(Offre.class);
-                filteredList.add(offre);
+
+                // Check if any of the relevant fields contains the search text (case insensitive)
+                boolean matchesTitre = offre.getTitre() != null &&
+                        offre.getTitre().toLowerCase().contains(searchLower);
+
+                boolean matchesSuperficie = offre.getSuperficie() != null &&
+                        offre.getSuperficie().toLowerCase().contains(searchLower);
+
+                // For numeric fields, check if the search text can be parsed to a number
+                boolean matchesLoyer = false;
+                if (offre.getLoyer() != null) {
+                    try {
+                        double searchNum = Double.parseDouble(searchText);
+                        // Check if the loyer equals the search number
+                        matchesLoyer = Math.abs(offre.getLoyer() - searchNum) < 0.01;
+                    } catch (NumberFormatException e) {
+                        // If search text is not a number, check if the string representation contains it
+                        matchesLoyer = offre.getLoyer().toString().contains(searchLower);
+                    }
+                }
+
+                // Add the offer to filtered list if any field matches
+                if (matchesTitre || matchesSuperficie || matchesLoyer) {
+                    filteredList.add(offre);
+                }
             }
+
+            // Update the adapter with the filtered list
             adapter.updateList(filteredList);
+        }).addOnFailureListener(e -> {
+            Log.e("FIREBASE_ERROR", "Error filtering offers", e);
+            Toast.makeText(OffreActivity.this, "Failed to filter offers", Toast.LENGTH_SHORT).show();
         });
     }
 

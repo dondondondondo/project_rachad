@@ -99,18 +99,22 @@
                 android:id="@+id/messageButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Messages"
                 android:visibility="gone"/>
 
             <Button
                 android:id="@+id/demandesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Demandes"
                 android:visibility="gone"/>
 
             <Button
                 android:id="@+id/deleteButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Supprimer"
+                android:backgroundTint="@color/red"
                 android:visibility="gone"/>
         </LinearLayout>
 

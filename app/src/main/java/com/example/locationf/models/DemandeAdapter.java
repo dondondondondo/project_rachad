@@ -157,6 +157,11 @@ public class DemandeAdapter extends RecyclerView.Adapter<DemandeAdapter.DemandeV
         }
     }
 
+    public void updateList(List<Demande> newList) {
+        demandeList = newList;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemCount() {
